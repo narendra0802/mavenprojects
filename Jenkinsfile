@@ -12,12 +12,18 @@ pipeline {
                 // Get some code from a GitHub repository
                 git 'https://github.com/narendra0802/mavenprojects'
 
-                // Run Maven on a Unix agent.
-                sh "mvn package"
-                sh "cp target/JenkinsWar.war /var/lib/tomcat8/webapps/"
-
-                // To run Maven on a Windows agent, use
+                / To run Maven on a Windows agent, use
                 // bat "mvn -Dmaven.test.failure.ignore=true clean package"
+            }
+        }
+        stage('Manual Approval') {
+            steps {
+                input "Is deploment in pre-prod is Good to be promoted to Prod ?"
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh "cp target/JenkinsWar.war /var/lib/tomcat8/webapps/"
             }
         }
     }
