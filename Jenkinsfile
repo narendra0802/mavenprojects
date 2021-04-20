@@ -3,14 +3,14 @@ pipeline {
 
     tools {
         // Install the Maven version configured as "M3" and add it to the path.
-       maven "maven"
+       maven "maven3.6.3"
     }
 
     stages {
         stage('Build&Deploy') {
             steps {
                 // Get some code from a GitHub repository
-                git 'https://github.com/jenkinsdemos/newmaven'
+                git 'https://github.com/narendra0802/mavenprojects'
 
                 // Run Maven on a Unix agent.
                 sh "mvn package"
