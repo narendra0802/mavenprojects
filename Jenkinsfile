@@ -7,12 +7,16 @@ pipeline {
     }
 
     stages {
-        stage('Build&Deploy') {
+        stage('Build') {
             steps {
                 // Get some code from a GitHub repository
                 git 'https://github.com/narendra0802/mavenprojects'
 
-                / To run Maven on a Windows agent, use
+               // Run Maven on a Unix agent.
+                sh "mvn package"
+   
+
+                // To run Maven on a Windows agent, use
                 // bat "mvn -Dmaven.test.failure.ignore=true clean package"
             }
         }
@@ -28,3 +32,4 @@ pipeline {
         }
     }
 }
+
